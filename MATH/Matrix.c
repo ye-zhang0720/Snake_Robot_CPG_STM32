@@ -1,4 +1,6 @@
 #include "Matrix.h"
+#include "usart.h"	
+#include "memory_manage.h"	 
 
 Matrix* InitMatrix(Matrix *matrix,int row,int column)                //初始化一个矩阵
 {
@@ -19,7 +21,7 @@ void ValueMatrix(Matrix *matrix,double* array[])         //给矩阵赋值
 {
     if (matrix->data != NULL)
     {
-        memcpy(matrix->data, array, matrix->column*matrix->row*sizeof(double));
+        mymemcpy(matrix->data, array, matrix->column*matrix->row*sizeof(double));
     }
 }
 
@@ -30,6 +32,7 @@ int SizeMatrix(Matrix *matrix)
 
 void FreeMatrix(Matrix *matrix)
 {
+	myfree(SRAMIN, matrix->data);
     myfree(SRAMIN,matrix);        //释放掉矩阵
 //    if (matrix->data == NULL)
 //        printf("释放成功\n");
@@ -42,23 +45,24 @@ void CopyMatrix(Matrix *matrix_A, Matrix *matrix_B)
 {
     matrix_B->column = matrix_A->column;
     matrix_B->row = matrix_A->row;
-    memcpy(matrix_B->data, matrix_A->data, SizeMatrix(matrix_A)*sizeof(double));
+    mymemcpy(matrix_B->data, matrix_A->data, SizeMatrix(matrix_A)*sizeof(double));
 }
 
 //打印矩阵
 void PrintMatrix(Matrix *matrix)
 {
-//    if(!matrix)
-//    {
-//        return;
-//    }
-//    int i = 0;
-//    for (i=0;i<SizeMatrix(matrix);i++)
-//    {
-//        printf("%lf\t", matrix->data[i]);
-//        if ((i+1)%matrix->column == 0)
-//            printf("\n");
-//    }
+	u8 a[] = {0x0D,0x0A}; 
+    if(!matrix)
+    {
+        return;
+    }
+    int i = 0;
+    for (i=0;i<SizeMatrix(matrix);i++)
+    {
+        printf("%lf\t", matrix->data[i]);
+        if ((i+1)%matrix->column == 0)
+            USART2_Send_Data(a, 2);
+    }
     
     
 }
@@ -181,28 +185,16 @@ Matrix* MulMatrix(Matrix *matrix_A,Matrix *matrix_B)
     {
         Matrix *matrix_C = InitMatrix(matrix_C,matrix_A->row,matrix_B->column);
         
-        //        printf("row:%d,column:%d",matrix_C->row,matrix_C->column);
-        //        printf("\n\n\n");
-        
-        
         for (i=0;i<matrix_A->row;i++)
         {
             for (j=0;j<matrix_B->column;j++)
             {
                 for (k=0;k<matrix_A->column;k++)
                 {
-                    //printf("%lf,",matrix_C->data[i*matrix_C->column + j]);
                     matrix_C->data[i*matrix_C->column + j] += matrix_A->data[i*matrix_A->column + k] * matrix_B->data[k*matrix_B->column + j];
-                    //printf("a:%lf，b:%lf, c:%lf,",matrix_A->data[i*matrix_A->column + k],matrix_B->data[k*matrix_B->column + j],matrix_C->data[i*matrix_C->column + j]);
-                    //printf("\n\n\n");
                 }
             }
         }
-        
-        //        printf("\n\n\n");
-        //        //PrintMatrix(matrix_C);
-        //        printf("\n\n\n");
-        //
         return matrix_C;
     }
     else
@@ -228,6 +220,7 @@ void TransMatrix(Matrix *matrix)
                 matrix->data[i*matrix->column + j] = matrixTemp->data[j*matrix->column + i];
             }
         }
+				FreeMatrix(matrixTemp);
     }
     else
     {
@@ -245,6 +238,7 @@ void TransMatrix(Matrix *matrix)
                 
             }
         }
+				FreeMatrix(matrixTemp);
     }
 }
 
@@ -386,6 +380,7 @@ Matrix* Inv(Matrix* A)
             }
         }
     }
+		FreeMatrix(t);
     return B;
 }
 

@@ -4,7 +4,6 @@
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
-#include "memory_manage.h"	  
 
 typedef struct
 {

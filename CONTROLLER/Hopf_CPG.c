@@ -1,5 +1,6 @@
 #include "Hopf_CPG.h"
 #include "Matrix.h"
+#include "memory_manage.h"	 
 
 Matrix* Hopf(double u, double v, float steps, float lambda, float omega, float sigma, float rho, Matrix* CouplingPar)
 {
@@ -28,7 +29,7 @@ Matrix* Coupling(double g, Matrix *W, Matrix *Rho, Matrix *Phi, Matrix *X, int i
     Matrix *Xi = InitMatrix(Xi,2,1);
     Matrix *Xj = InitMatrix(Xj,2,1);   //初始化xj
     Matrix *R = InitMatrix(R,2,2);     //初始化R
-		Matrix *tmp2;
+		Matrix *tmp2, *tmp3;
 		//定义返回值
     Matrix *rel = InitMatrix(rel,2,1);   //初始化xj
 	
@@ -69,16 +70,24 @@ Matrix* Coupling(double g, Matrix *W, Matrix *Rho, Matrix *Phi, Matrix *X, int i
 			
         tmp2 = MulMatrix(R,Xj);
         NumMulMatrix(tmp2, GetValue(Rho,0,i) / GetValue(Rho,0,j));
-        tmp2 = CutMatrix(tmp2, Xi);
-        NumMulMatrix(tmp2, GetValue(W,i,j));
-        rel = AddMatrix(rel, tmp2);
+        tmp3 = CutMatrix(tmp2, Xi);
+				FreeMatrix(tmp2);
+        NumMulMatrix(tmp3, GetValue(W,i,j));
+        tmp2 = AddMatrix(rel, tmp3);
+				FreeMatrix(tmp3);
+				FreeMatrix(rel);
+				CopyMatrix(tmp2, rel);
+				FreeMatrix(tmp2);
     }
     NumMulMatrix(rel, g);
     TransMatrix(rel);
+		
+		//释放内存
 		FreeMatrix(Xi);
 		FreeMatrix(Xj);
 		FreeMatrix(R);
 		FreeMatrix(tmp2);
+
     return rel;
 }
 

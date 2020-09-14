@@ -378,7 +378,7 @@
               <MiscControls>--c99</MiscControls>
               <Define>STM32F40_41xxx,USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\CORE;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\FWLIB\STM32F4xx_StdPeriph_Driver\inc;..\USER;..\HARDWARE\LED;..\HARDWARE\BEEP;..\HARDWARE\KEY;..\FWLIB\inc;..\HARDWARE\AX12A;..\CONTROLLER;..\MATH;..\SYSTEM\memory</IncludePath>
+              <IncludePath>..\CORE;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\FWLIB\STM32F4xx_StdPeriph_Driver\inc;..\USER;..\HARDWARE\LED;..\HARDWARE\BEEP;..\HARDWARE\KEY;..\FWLIB\inc;..\HARDWARE\AX12A;..\CONTROLLER;..\MATH;..\SYSTEM\memory;..\CONTROLLER;..\MATH</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -540,7 +540,7 @@
             <File>
               <FileName>Hopf_CPG.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Hopf_CPG.c</FilePath>
+              <FilePath>..\CONTROLLER\Hopf_CPG.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -550,7 +550,7 @@
             <File>
               <FileName>Matrix.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Matrix.c</FilePath>
+              <FilePath>..\MATH\Matrix.c</FilePath>
             </File>
           </Files>
         </Group>

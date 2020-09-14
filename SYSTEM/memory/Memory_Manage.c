@@ -144,7 +144,8 @@ void myfree(u8 memx,void *ptr)
 	u32 offset;   
 	if(ptr==NULL)return;//地址为0.  
  	offset=(u32)ptr-(u32)mallco_dev.membase[memx];     
-    my_mem_free(memx,offset);	//释放内存      
+   my_mem_free(memx,offset);	//释放内存      
+
 }  
 //分配内存(外部调用)
 //memx:所属内存块

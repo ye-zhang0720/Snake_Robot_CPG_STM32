@@ -23,10 +23,12 @@
 int main(void)
 { 
 	unsigned short temp = 0;
+	u8 a[] = {0x0D,0x0A};   //换行符
 	u16 times=0;  
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);//设置系统中断优先级分组2
 	delay_init(168);		//延时初始化 
 	uart_init(115200);	//串口初始化波特率为115200
+	uart2_init(115200); //串口初始化波特率为115200
 	LED_Init();		  		//初始化与LED连接的硬件接口
 	
 	my_mem_init(SRAMIN);		//初始化内部内存池
@@ -79,7 +81,7 @@ int main(void)
 
 
 	Matrix *X = InitMatrix(X,n,2);
-  for (int i = 0; i < X->column; i++)        //设定初始位置【u,v】= 【0，0.01】
+  for (int i = 0; i < X->row; i++)        //设定初始位置【u,v】= 【0，0.01】
   {
 		ValueOneMatrix(X, 0, i, 0);
     ValueOneMatrix(X, 0.01, i, 1);
@@ -92,11 +94,37 @@ int main(void)
       
   double u = 0;
   double v = 0;
+	
+	//中间变量定义
   Matrix *X_now;	
+	Matrix *coup;
+	Matrix *hopf;
 	
 	
+	
+	printf("内存使用率：%d\n", my_mem_perused(SRAMIN));
+	USART2_Send_Data(a, 2);
+	
+	
+	//printf("%d   %d",X->row,X->column);
+	//USART2_Send_Data(a, 2);
+	//PrintMatrix(W);
 	while(1)
 	{
+		//USART2接收数据分析
+		if(USART2_RX_STA&0x8000)
+		{					   
+//			len=USART2_RX_STA&0x3fff;//得到此次接收到的数据长度
+//			printf("\r\n您发送的消息为:\r\n");
+//			for(t=0;t<len;t++)
+//			{
+//				USART_SendData(USART2, USART2_RX_BUF[t]);         //向串口1发送数据
+//				while(USART_GetFlagStatus(USART2,USART_FLAG_TC)!=SET);//等待发送结束
+//			}
+//			printf("\r\n\r\n");//插入换行
+//			USART2_RX_STA=0;
+		}
+		
 		
 		if(times%300 == 0)
 		{
@@ -106,25 +134,37 @@ int main(void)
       {
 				u = GetValue(X, j, 0) - center->data[0];
         v = GetValue(X, j, 1) - center->data[1];
+				//释放内存
+				FreeMatrix(coup);
+				FreeMatrix(hopf);
+				FreeMatrix(X_now);
 				
-				//Coupling(g, W, Rho, Phi, X, j);
-        X_now = AddMatrix(Hopf(u ,v , step, lambda, omega, sigma, Rho->data[j], Coupling(g, W, Rho, Phi, X, j)), center);
+				coup = Coupling(g, W, Rho, Phi, X, j);
+				hopf = Hopf(u ,v , step, lambda, omega, sigma, Rho->data[j], coup);			
+        X_now = AddMatrix(hopf, center);
         ValueOneMatrix(X, X_now->data[0], j, 0);
         ValueOneMatrix(X, X_now->data[1], j, 1);
-            
+
+				
         MotorMove(j, AngletoPostion(GetValue(X, 2*j, 0)));
         //printf("%lf\t ",GetValue(X, j, 0));
-      }
-			
+      }	
 		}
 		
 		
+		if(times%500 == 0){
+			
+		}
 		
-		
+//		if(times%1000 == 0){
+//			p = mymalloc(SRAMIN,2048);
+//			myfree(SRAMIN,p);
+//		}
 		
 		if(times%30==0)
 		{
-
+			printf("内存使用率：%d\n", my_mem_perused(SRAMIN));
+			USART2_Send_Data(a, 2);
 			temp = readDxlResult();
 	
 			

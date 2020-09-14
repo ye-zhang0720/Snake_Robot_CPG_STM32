@@ -1,6 +1,6 @@
-..\obj\hopf_cpg.o: Hopf_CPG.c
-..\obj\hopf_cpg.o: Hopf_CPG.h
-..\obj\hopf_cpg.o: Matrix.h
+..\obj\hopf_cpg.o: ..\CONTROLLER\Hopf_CPG.c
+..\obj\hopf_cpg.o: ..\CONTROLLER\Hopf_CPG.h
+..\obj\hopf_cpg.o: ..\MATH\Matrix.h
 ..\obj\hopf_cpg.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 ..\obj\hopf_cpg.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 ..\obj\hopf_cpg.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

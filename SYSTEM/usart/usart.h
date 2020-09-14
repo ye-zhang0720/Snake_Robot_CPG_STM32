@@ -17,12 +17,16 @@
 
 #define USART_REC_LEN  			20  	//¶¨Òå×î´ó½ÓÊÕ×Ö½ÚÊı 200
 #define EN_USART1_RX 			1		//Ê¹ÄÜ£¨1£©/½ûÖ¹£¨0£©´®¿Ú1½ÓÊÕ
+#define EN_USART2_RX 			1		//Ê¹ÄÜ£¨1£©/½ûÖ¹£¨0£©´®¿Ú2½ÓÊÕ
 
 #define readOnly(x)	x->CR1 |= 4;	x->CR1 &= 0xFFFFFFF7;		//??x?????,CR1->RE=1, CR1->TE=0
 #define sendOnly(x)	x->CR1 |= 8;	x->CR1 &= 0xFFFFFFFB;		//??x?????,CR1->RE=0, CR1->TE=1
 
 
 extern u8  USART_RX_BUF[USART_REC_LEN]; //½ÓÊÕ»º³å,×î´óUSART_REC_LEN¸ö×Ö½Ú.Ä©×Ö½ÚÎª»»ĞĞ·û 
+extern u8  USART2_RX_BUF[USART_REC_LEN]; //½ÓÊÕ»º³å,×î´óUSART_REC_LEN¸ö×Ö½Ú.Ä©×Ö½ÚÎª»»ĞĞ·û 
+extern u16 USART2_RX_STA;         		//½ÓÊÕ×´Ì¬±ê¼Ç	
+
 
 void uart_init(u32 bound);
 
@@ -31,6 +35,11 @@ unsigned char USART1_Send_Data(unsigned char *buffer, unsigned char size);   //´
 void setnByteToBeRead(unsigned char a);   //ÉèÖÃ½ÓÊÕÊı¾İ³¤¶È
 unsigned char* USART1_read_Data(void);  //´®¿Ú½ÓÊÕÊı¾İ·µ»Ø
 _Bool available(void);   //´®¿Ú½ÓÊÕÍê³É
+
+
+
+void uart2_init(u32 bound);
+unsigned char USART2_Send_Data(unsigned char *buffer, unsigned char size);
 
 #endif
 

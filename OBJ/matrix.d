@@ -1,9 +1,12 @@
-..\obj\matrix.o: Matrix.c
-..\obj\matrix.o: Matrix.h
+..\obj\matrix.o: ..\MATH\Matrix.c
+..\obj\matrix.o: ..\MATH\Matrix.h
 ..\obj\matrix.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 ..\obj\matrix.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 ..\obj\matrix.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-..\obj\matrix.o: ..\SYSTEM\memory\memory_manage.h
+..\obj\matrix.o: ..\SYSTEM\usart\usart.h
+..\obj\matrix.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\obj\matrix.o: ..\USER\stm32f4xx_conf.h
+..\obj\matrix.o: ..\FWLIB\inc\stm32f4xx_adc.h
 ..\obj\matrix.o: ..\USER\stm32f4xx.h
 ..\obj\matrix.o: ..\CORE\core_cm4.h
 ..\obj\matrix.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -12,8 +15,6 @@
 ..\obj\matrix.o: ..\CORE\core_cm4_simd.h
 ..\obj\matrix.o: ..\USER\system_stm32f4xx.h
 ..\obj\matrix.o: ..\USER\stm32f4xx_conf.h
-..\obj\matrix.o: ..\FWLIB\inc\stm32f4xx_adc.h
-..\obj\matrix.o: ..\USER\stm32f4xx.h
 ..\obj\matrix.o: ..\FWLIB\inc\stm32f4xx_crc.h
 ..\obj\matrix.o: ..\FWLIB\inc\stm32f4xx_dbgmcu.h
 ..\obj\matrix.o: ..\FWLIB\inc\stm32f4xx_dma.h
@@ -39,3 +40,5 @@
 ..\obj\matrix.o: ..\FWLIB\inc\stm32f4xx_dac.h
 ..\obj\matrix.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 ..\obj\matrix.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
+..\obj\matrix.o: ..\SYSTEM\sys\sys.h
+..\obj\matrix.o: ..\SYSTEM\memory\memory_manage.h

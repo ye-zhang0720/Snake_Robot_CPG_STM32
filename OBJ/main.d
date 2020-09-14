@@ -43,10 +43,10 @@
 ..\obj\main.o: ..\HARDWARE\KEY\key.h
 ..\obj\main.o: ..\HARDWARE\AX12A\Dynamixel.h
 ..\obj\main.o: ..\HARDWARE\AX12A\DynamixelConfig.h
-..\obj\main.o: Matrix.h
+..\obj\main.o: ..\MATH\Matrix.h
 ..\obj\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 ..\obj\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 ..\obj\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+..\obj\main.o: ..\CONTROLLER\Hopf_CPG.h
 ..\obj\main.o: ..\SYSTEM\memory\memory_manage.h
-..\obj\main.o: Hopf_CPG.h
 ..\obj\main.o: ..\HARDWARE\AX12A\Motor.h
