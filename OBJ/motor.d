@@ -1,11 +1,7 @@
 ..\obj\motor.o: ..\HARDWARE\AX12A\Motor.c
 ..\obj\motor.o: ..\HARDWARE\AX12A\Motor.h
 ..\obj\motor.o: ..\HARDWARE\AX12A\Dynamixel.h
-..\obj\motor.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-..\obj\motor.o: ..\HARDWARE\AX12A\DynamixelConfig.h
-..\obj\motor.o: ..\SYSTEM\usart\usart.h
-..\obj\motor.o: ..\USER\stm32f4xx_conf.h
-..\obj\motor.o: ..\FWLIB\inc\stm32f4xx_adc.h
+..\obj\motor.o: ..\SYSTEM\sys\sys.h
 ..\obj\motor.o: ..\USER\stm32f4xx.h
 ..\obj\motor.o: ..\CORE\core_cm4.h
 ..\obj\motor.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -14,6 +10,8 @@
 ..\obj\motor.o: ..\CORE\core_cm4_simd.h
 ..\obj\motor.o: ..\USER\system_stm32f4xx.h
 ..\obj\motor.o: ..\USER\stm32f4xx_conf.h
+..\obj\motor.o: ..\FWLIB\inc\stm32f4xx_adc.h
+..\obj\motor.o: ..\USER\stm32f4xx.h
 ..\obj\motor.o: ..\FWLIB\inc\stm32f4xx_crc.h
 ..\obj\motor.o: ..\FWLIB\inc\stm32f4xx_dbgmcu.h
 ..\obj\motor.o: ..\FWLIB\inc\stm32f4xx_dma.h
@@ -39,4 +37,5 @@
 ..\obj\motor.o: ..\FWLIB\inc\stm32f4xx_dac.h
 ..\obj\motor.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 ..\obj\motor.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
-..\obj\motor.o: ..\SYSTEM\sys\sys.h
+..\obj\motor.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+..\obj\motor.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

@@ -4,7 +4,6 @@
 ..\obj\matrix.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 ..\obj\matrix.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 ..\obj\matrix.o: ..\SYSTEM\usart\usart.h
-..\obj\matrix.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\matrix.o: ..\USER\stm32f4xx_conf.h
 ..\obj\matrix.o: ..\FWLIB\inc\stm32f4xx_adc.h
 ..\obj\matrix.o: ..\USER\stm32f4xx.h

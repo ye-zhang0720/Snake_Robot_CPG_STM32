@@ -22,12 +22,11 @@
 
 int main(void)
 { 
-	unsigned short temp = 0;
 	u8 a[] = {0x0D,0x0A};   //换行符
 	u16 times=0;  
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);//设置系统中断优先级分组2
 	delay_init(168);		//延时初始化 
-	uart_init(115200);	//串口初始化波特率为115200
+	ServoUSART_Init(115200);	//串口初始化波特率为115200
 	uart2_init(115200); //串口初始化波特率为115200
 	LED_Init();		  		//初始化与LED连接的硬件接口
 	
@@ -102,33 +101,40 @@ int main(void)
 	
 	
 	
-	printf("内存使用率：%d\n", my_mem_perused(SRAMIN));
+	printf("\n\n\n内存使用率：%d\n", my_mem_perused(SRAMIN));
 	USART2_Send_Data(a, 2);
 	
+	u16 len = 0;
 	
-	//printf("%d   %d",X->row,X->column);
-	//USART2_Send_Data(a, 2);
-	//PrintMatrix(W);
+			u8 freq = 5;
+	 u8 t=0;
+	
+				while(!pingServo (1))			               //如果不成功Ping,进入死循环
+			{
+					printf ("Ping failed\n");   
+			}
+					printf("Ping OK\n");
+	
 	while(1)
 	{
-		//USART2接收数据分析
-		if(USART2_RX_STA&0x8000)
-		{					   
-//			len=USART2_RX_STA&0x3fff;//得到此次接收到的数据长度
-//			printf("\r\n您发送的消息为:\r\n");
-//			for(t=0;t<len;t++)
+
+		//USART1接收数据分析
+//		if(USART_RX_STA&0x8000)
+//		{				
+//			
+//			len=USART_RX_STA&0x7FFF;//得到此次接收到的数据长度
+////			printf("\r\n得到的数据为:\r\n");
+//			for(int t=0;t<len;t++)
 //			{
-//				USART_SendData(USART2, USART2_RX_BUF[t]);         //向串口1发送数据
-//				while(USART_GetFlagStatus(USART2,USART_FLAG_TC)!=SET);//等待发送结束
+//				printf("%x",USART_RX_BUF[t]);
 //			}
 //			printf("\r\n\r\n");//插入换行
-//			USART2_RX_STA=0;
-		}
+//			USART_RX_STA=0;
+//		}
 		
-		
+
 		if(times%300 == 0)
 		{
-			//ping(1);
 			
 			for(int j = 0; j < n; j++)
       {
@@ -146,35 +152,24 @@ int main(void)
         ValueOneMatrix(X, X_now->data[1], j, 1);
 
 				
-        MotorMove(j, AngletoPostion(GetValue(X, 2*j, 0)));
-        //printf("%lf\t ",GetValue(X, j, 0));
+        setServoAngle(j, GetValue(X, 2*j, 0)*180/pi);
+
       }	
 		}
 		
-		
+
 		if(times%500 == 0){
 			
+
 		}
-		
-//		if(times%1000 == 0){
-//			p = mymalloc(SRAMIN,2048);
-//			myfree(SRAMIN,p);
-//		}
-		
-		if(times%30==0)
+
+		if(times%300==0)
 		{
-			printf("内存使用率：%d\n", my_mem_perused(SRAMIN));
-			USART2_Send_Data(a, 2);
-			temp = readDxlResult();
-	
+//			printf("内存使用率：%d\n", my_mem_perused(SRAMIN));
+//			USART2_Send_Data(a, 2);
 			
-//			if(temp != 0xffff)
-//			{
-//				unsigned char tmp[2];
-//				tmp[0] = (unsigned char)temp%0xff;
-//				tmp[1] = (unsigned char)temp/0xff;
-//				USART1_Send_Data(tmp,2);
-//			}
+//		printf("%hd",USART_RX_STA);
+//		USART2_Send_Data(a, 2);
 		}
 		if(times%30==0) LED0=!LED0;//闪烁LED,提示系统正在运行.
 		delay_ms(10);   

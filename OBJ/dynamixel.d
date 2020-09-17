@@ -1,10 +1,6 @@
 ..\obj\dynamixel.o: ..\HARDWARE\AX12A\Dynamixel.c
 ..\obj\dynamixel.o: ..\HARDWARE\AX12A\Dynamixel.h
-..\obj\dynamixel.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-..\obj\dynamixel.o: ..\HARDWARE\AX12A\DynamixelConfig.h
-..\obj\dynamixel.o: ..\SYSTEM\usart\usart.h
-..\obj\dynamixel.o: ..\USER\stm32f4xx_conf.h
-..\obj\dynamixel.o: ..\FWLIB\inc\stm32f4xx_adc.h
+..\obj\dynamixel.o: ..\SYSTEM\sys\sys.h
 ..\obj\dynamixel.o: ..\USER\stm32f4xx.h
 ..\obj\dynamixel.o: ..\CORE\core_cm4.h
 ..\obj\dynamixel.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -13,6 +9,8 @@
 ..\obj\dynamixel.o: ..\CORE\core_cm4_simd.h
 ..\obj\dynamixel.o: ..\USER\system_stm32f4xx.h
 ..\obj\dynamixel.o: ..\USER\stm32f4xx_conf.h
+..\obj\dynamixel.o: ..\FWLIB\inc\stm32f4xx_adc.h
+..\obj\dynamixel.o: ..\USER\stm32f4xx.h
 ..\obj\dynamixel.o: ..\FWLIB\inc\stm32f4xx_crc.h
 ..\obj\dynamixel.o: ..\FWLIB\inc\stm32f4xx_dbgmcu.h
 ..\obj\dynamixel.o: ..\FWLIB\inc\stm32f4xx_dma.h
@@ -38,4 +36,6 @@
 ..\obj\dynamixel.o: ..\FWLIB\inc\stm32f4xx_dac.h
 ..\obj\dynamixel.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 ..\obj\dynamixel.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
-..\obj\dynamixel.o: ..\SYSTEM\sys\sys.h
+..\obj\dynamixel.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+..\obj\dynamixel.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\obj\dynamixel.o: ..\SYSTEM\delay\delay.h
