@@ -33,9 +33,10 @@ int main(void)
 	my_mem_init(SRAMIN);		//初始化内部内存池
 	my_mem_init(SRAMCCM);		//初始化CCM内存池  
 	
+	
 	//CPG定义
   //初始值
-  int n = 7;
+	int n = 7;
   float lambda = 1;          //吸引率
   float omega = 0.5*pi;      //震荡频率
   float sigma = 1;           //分叉参数
@@ -104,10 +105,7 @@ int main(void)
 	printf("\n\n\n内存使用率：%d\n", my_mem_perused(SRAMIN));
 	USART2_Send_Data(a, 2);
 	
-	u16 len = 0;
 	
-			u8 freq = 5;
-	 u8 t=0;
 	
 				while(!pingServo (1))			               //如果不成功Ping,进入死循环
 			{
@@ -153,11 +151,24 @@ int main(void)
 
 				
         setServoAngle(j, GetValue(X, 2*j, 0)*180/pi);
-
+				
+				
       }	
 		}
+		//延时3ms后读取力矩
+		delay_ms(3);
+		for(int j = 0; j < n; j++){
+			uint16_t torque = 0;
+			if (!getServoTorque (j, &torque))							//得到当前扭矩
+			{
+						fflush (stdout);
+//						printf ("Get servo torque failed\n");
+			}
+			printf("  %d  ", torque);
+			setMotorTorque(j, torque);
+		}
+		USART2_Send_Data(a, 2);
 		
-
 		if(times%500 == 0){
 			
 
